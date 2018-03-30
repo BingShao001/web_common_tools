@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean id="consumer" class="com.netcommon.mq.Consumer"
+		init-method="init" destroy-method="destroy">
+		<constructor-arg name="consumerGroup" value="rocketmq-test" />
+		<constructor-arg name="namesrvAddr" value="127.0.0.1:9876" />
+		<!-- 客户端实例名称 网络资源链接 -->
+		<constructor-arg name="instanceName" value="test" />
+		<constructor-arg name="topic" value="testTopic" />
+		<constructor-arg name="messageListener" ref="messageListener" />
+	</bean>
+	<bean id="messageListener" class="com.netcommon.mq.StringMessageListener" />
+	<bean id="producer" class="com.netcommon.mq.Producer"
+		init-method="init" destroy-method="destroy">
+		<constructor-arg name="producerGroup" value="rocketmq-test" />
+		<constructor-arg name="namesrvAddr" value="127.0.0.1:9876" />
+		<constructor-arg name="instanceName" value="test" />
+	</bean>
+
+</beans>
