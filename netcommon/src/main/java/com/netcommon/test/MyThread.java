@@ -31,7 +31,7 @@ public class MyThread extends Thread {
 			System.out.println(flag + " : " + count);
 		}
 	}
-	@org.junit.Test
+
 	public void threadTest(){
 		System.out.println("test...");
 		for (int i = 0; i < 50; i++) {

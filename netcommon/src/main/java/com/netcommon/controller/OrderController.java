@@ -15,6 +15,7 @@ import com.netcommon.service.OrderService;
 import com.netcommon.util.BeansConvert;
 
 @Controller
+@RequestMapping("netcommon")
 public class OrderController {
 	@Autowired
 	private OrderService orderService;
@@ -45,5 +46,21 @@ public class OrderController {
 			orderEntitys.add(orderEntity);
 		}
 		return orderService.addOrderBatch(orderEntitys,0);
+	}
+	@RequestMapping("getOrderBean")
+	@ResponseBody
+	public OrderBean getOrderBean(){
+		OrderBean order = new OrderBean();
+		order.setOrderId(123456789);
+		order.setPrice(1200.00);
+		order.setOrderName("京东618大促");
+		order.setSaller("nike旗舰店");
+		order.setClosed(true);
+		List<String> goods = new ArrayList<>();
+		goods.add("跑鞋蓝色air");
+		goods.add("T恤黑色");
+		goods.add("白色篮球袜");
+		order.setGoods(goods);
+		return order;
 	}
 }

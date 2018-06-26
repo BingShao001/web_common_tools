@@ -1,13 +1,19 @@
 package com.netcommon.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 
+import com.alibaba.fastjson.JSON;
+import com.netcommon.bean.OrderBean;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +29,18 @@ public class HelloController {
 	@Autowired
 	private AopService aopService;
 
+
+	@RequestMapping("/test")
+	public String test(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		OrderBean bean = new OrderBean();
+		bean.setOrderId(213213);
+		bean.setOrderName("test");
+		bean.setPrice(111.11);
+		String data = JSON.toJSONString(bean);
+		System.out.println(data);
+		request.setAttribute("data", data);
+		return "index";
+	}
 	@RequestMapping("/hello")
 	@ResponseBody
 	public Map hello() throws Exception {
